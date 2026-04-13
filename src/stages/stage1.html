@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Fase 1 - Configuração</title>
+  <style>
+    __COMMON_THEME__
+
+    .config-layout {
+      display: grid;
+      gap: 20px;
+    }
+
+    .summary-panel {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .summary-pill {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .summary-pill strong {
+      display: block;
+      font-size: 1.1rem;
+      margin-top: 4px;
+    }
+
+    .clue-template {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.85rem;
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 12px 14px;
+      border-radius: 14px;
+      overflow: auto;
+    }
+  </style>
+</head>
+<body>
+  <form id="config-form">
+    <div class="app-shell config-layout">
+      <section class="hero">
+        <div class="hero__eyebrow">Lab.js · Experimento de Cadeia</div>
+        <h1 class="hero__title">Configuração do experimento</h1>
+        <p class="hero__subtitle">
+          Nesta etapa você define participantes, parâmetros da tarefa, regras de encerramento
+          e conjuntos de dicas verbais. O layout foi refatorado para ficar mais claro, mais
+          legível e mais seguro para edição e reaproveitamento.
+        </p>
+        <div class="hero__chips">
+          <span class="chip">Fluxo preservado</span>
+          <span class="chip">JSON compatível com Lab.js</span>
+          <span class="chip">Salvar / carregar configuração</span>
+          <span class="chip">Pronto para coleta</span>
+        </div>
+      </section>
+
+      <section class="card card--soft">
+        <div class="card__header">
+          <div>
+            <h2 class="card__title">Resumo rápido</h2>
+            <p class="card__description">
+              Esses indicadores acompanham o que já foi configurado e ajudam a revisar a sessão antes de avançar.
+            </p>
+          </div>
+          <span class="badge" id="config-status-badge">Configuração em edição</span>
+        </div>
+        <div class="summary-panel">
+          <div class="summary-pill">
+            Elos na cadeia
+            <strong id="summary-elos">6</strong>
+          </div>
+          <div class="summary-pill">
+            Sequência para dicas
+            <strong id="summary-sequencia">—</strong>
+          </div>
+          <div class="summary-pill">
+            Nº de conjuntos de dicas
+            <strong id="summary-clues">0</strong>
+          </div>
+          <div class="summary-pill">
+            Critérios ativos
+            <strong id="summary-criteria">0</strong>
+          </div>
+        </div>
+      </section>
+
+      <div class="two-columns">
+        <section class="card">
+          <div class="card__header">
+            <div>
+              <h2 class="card__title">Informações da sessão</h2>
+              <p class="card__description">
+                Campos básicos para identificar participante, experimentador e a configuração salva.
+              </p>
+            </div>
+          </div>
+          <div class="field-grid">
+            <div class="field">
+              <label for="participant-name">Nome do participante</label>
+              <input type="text" id="participant-name" name="Nome_part" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="participant-age">Idade</label>
+              <input type="text" id="participant-age" name="Idade" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="participant-sex">Sexo</label>
+              <select id="participant-sex" name="Sexo">
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+                <option value="Outro">Outro</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="experimenter-name">Nome do experimentador</label>
+              <input type="text" id="experimenter-name" name="Nome_exp" autocomplete="off">
+            </div>
+            <div class="field field--full">
+              <label for="config-name">Nome da configuração</label>
+              <input type="text" id="config-name" autocomplete="off" placeholder="Ex.: cadeia_verbal_turmaA">
+              <div class="helper">Esse nome será usado no arquivo JSON exportado da configuração.</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card__header">
+            <div>
+              <h2 class="card__title">Parâmetros da tarefa</h2>
+              <p class="card__description">
+                Defina a quantidade de elos, a regra de liberação das dicas e a instrução apresentada.
+              </p>
+            </div>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="elos">Quantidade de elos na cadeia</label>
+              <select id="elos" name="qtdElos">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6" selected>6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="sequencia">Sequência</label>
+              <input type="text" id="sequencia" name="sequencia" placeholder="Ex.: 1">
+              <div class="helper">Após quantos acertos consecutivos o bloco de dicas deve aparecer.</div>
+            </div>
+            <div class="field field--full">
+              <label for="instruction-text">Instrução</label>
+              <textarea id="instruction-text" name="instrucao" placeholder="Descreva a orientação que será apresentada ao participante."></textarea>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="card">
+        <div class="card__header">
+          <div>
+            <h2 class="card__title">Dicas verbais</h2>
+            <p class="card__description">
+              Cada linha segue o formato abaixo: primeiro a resposta correta, depois as dicas separadas por ponto e vírgula.
+            </p>
+          </div>
+          <div class="inline">
+            <label class="field__label" for="clues-count">Quantidade</label>
+            <select id="clues-count" name="clues">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="clue-template">resposta correta;dica 1;dica 2;dica 3</div>
+        <div class="helper" style="margin-top:12px;">
+          Exemplo: <strong>GATO;mia;animal doméstico;tem bigodes</strong>
+        </div>
+
+        <div id="clues-fields" class="section-stack" style="margin-top:18px;"></div>
+      </section>
+
+      <section class="card">
+        <div class="card__header">
+          <div>
+            <h2 class="card__title">Critérios de encerramento</h2>
+            <p class="card__description">
+              Ative apenas os critérios que deseja usar. Os demais ficarão desabilitados.
+            </p>
+          </div>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle">
+            <input class="toggle__box" type="checkbox" id="tempo-check">
+            <div class="field">
+              <label for="tempo-input">Tempo (segundos)</label>
+              <input type="text" id="tempo-input" disabled>
+              <div class="helper">Quando ativo, a tarefa termina automaticamente após esse tempo.</div>
+            </div>
+          </div>
+
+          <div class="toggle">
+            <input class="toggle__box" type="checkbox" id="acertos-check">
+            <div class="field">
+              <label for="acertos-input">Número de acertos</label>
+              <input type="text" id="acertos-input" disabled>
+              <div class="helper">Quando ativo, a sessão termina ao atingir esse total de acertos.</div>
+            </div>
+          </div>
+
+          <div class="toggle">
+            <input class="toggle__box" type="checkbox" id="erros-check">
+            <div class="field">
+              <label for="erros-input">Número de erros</label>
+              <input type="text" id="erros-input" disabled>
+              <div class="helper">Quando ativo, a sessão termina ao atingir esse total de erros.</div>
+            </div>
+          </div>
+
+          <div class="toggle">
+            <input class="toggle__box" type="checkbox" id="tentativas-check">
+            <div class="field">
+              <label for="tentativas-input">Número de tentativas</label>
+              <input type="text" id="tentativas-input" disabled>
+              <div class="helper">Quando ativo, a sessão termina ao atingir esse total de respostas emitidas.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="toolbar">
+        <div class="toolbar__meta">
+          <div class="toolbar__title">Ações da configuração</div>
+          <div class="toolbar__text">Você pode salvar, carregar, limpar e depois avançar para a definição dos elos.</div>
+        </div>
+        <div class="actions">
+          <button type="button" id="save-config" class="button button--ghost">Salvar configuração</button>
+          <label for="load-config" class="fake-button button button--ghost">Carregar JSON</label>
+          <input type="file" id="load-config" class="hidden-input" accept=".json">
+          <button type="button" id="clear-config" class="button button--danger">Limpar</button>
+          <button type="submit" id="next-stage" class="button button--primary submit">Próximo</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</body>
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Fase 3 - Execução do experimento</title>
+  <style>
+    __COMMON_THEME__
+
+    body {
+      padding: 18px;
+    }
+
+    .experiment-shell {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      gap: 18px;
+    }
+
+    .experiment-header {
+      display: grid;
+      gap: 16px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #2851e3 100%);
+      color: #fff;
+      border-radius: 22px;
+      padding: 20px 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .experiment-header__top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: start;
+      flex-wrap: wrap;
+    }
+
+    .experiment-header__title {
+      font-size: clamp(1.25rem, 1.1rem + 0.9vw, 1.8rem);
+      font-weight: 800;
+    }
+
+    .experiment-header__description {
+      color: rgba(255,255,255,0.82);
+      line-height: 1.5;
+      margin-top: 6px;
+      max-width: 920px;
+    }
+
+    .status-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .experiment-layout {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1.9fr) minmax(310px, 0.85fr);
+      align-items: start;
+    }
+
+    .board {
+      display: grid;
+      gap: 18px;
+    }
+
+    .stimuli-section {
+      background: rgba(255,255,255,0.9);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .stimuli-grid {
+      display: grid;
+      gap: 14px;
+      min-height: 420px;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .stimulus-card {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #fff 0%, #f8fbff 100%);
+      border-radius: 18px;
+      padding: 14px;
+      min-height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.08s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      user-select: none;
+      overflow: hidden;
+    }
+
+    .stimulus-card:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent);
+      box-shadow: var(--focus);
+    }
+
+    .stimulus-card.is-disabled {
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .stimulus-card img {
+      max-width: 100%;
+      max-height: 180px;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+
+    .stimulus-card__text {
+      font-weight: 800;
+      font-size: 1.05rem;
+      line-height: 1.35;
+      word-break: break-word;
+    }
+
+    .selected-section {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .selected-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      min-height: 90px;
+    }
+
+    .selected-card {
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #f8fbff;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .selected-card img {
+      max-width: 100%;
+      max-height: 80px;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    .sidebar {
+      display: grid;
+      gap: 18px;
+      position: sticky;
+      top: 18px;
+    }
+
+    .score-card {
+      display: grid;
+      gap: 14px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .score-pill {
+      padding: 16px;
+      border-radius: 16px;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .score-pill--success {
+      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+    }
+
+    .score-pill--danger {
+      background: linear-gradient(135deg, #c2410c 0%, #ef4444 100%);
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .mini-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #f8fbff;
+      font-size: 0.94rem;
+    }
+
+    .final-panel {
+      display: none;
+      justify-items: center;
+      gap: 14px;
+      padding: 24px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: #fff;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .final-panel.is-visible {
+      display: grid;
+    }
+
+    .final-panel__title {
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+
+    .final-panel__text {
+      max-width: 760px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .log-preview {
+      display: none;
+      padding: 16px;
+      white-space: pre-wrap;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #0f172a;
+      color: #e2e8f0;
+      width: 100%;
+      max-height: 260px;
+      overflow: auto;
+      text-align: left;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.84rem;
+    }
+
+    .clue-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: rgba(15, 23, 42, 0.62);
+      padding: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .clue-overlay.is-visible {
+      display: flex;
+    }
+
+    .clue-dialog {
+      width: min(760px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      background: #fff;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.28);
+      padding: 22px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .clue-list {
+      display: grid;
+      gap: 10px;
+      max-height: 280px;
+      overflow: auto;
+    }
+
+    .clue-item {
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #f8fbff;
+    }
+
+    .clue-dialog input[type="text"] {
+      min-height: 50px;
+      font-size: 1rem;
+    }
+
+    .audio-hidden {
+      display: none;
+    }
+
+    @media (max-width: 1024px) {
+      .experiment-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .stimuli-grid {
+        min-height: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <form id="experiment-form" novalidate>
+    <div class="experiment-shell">
+      <section class="experiment-header">
+        <div class="experiment-header__top">
+          <div>
+            <div class="hero__eyebrow">Execução da tarefa</div>
+            <h1 class="experiment-header__title">Selecione os estímulos na ordem correta e use as dicas quando elas aparecerem</h1>
+            <p class="experiment-header__description" id="instruction-copy">
+              A instrução configurada será mostrada aqui no início da execução.
+            </p>
+          </div>
+          <div class="status-chips">
+            <div class="status-chip" id="status-sequence-chip">Sequência: —</div>
+            <div class="status-chip" id="status-reason-chip">Status: em andamento</div>
+          </div>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat__label">Itens corretos na cadeia</div>
+            <div class="stat__value" id="progress-sequence">0 / 0</div>
+          </div>
+          <div class="stat">
+            <div class="stat__label">Tentativas registradas</div>
+            <div class="stat__value" id="attempt-count">0</div>
+          </div>
+          <div class="stat">
+            <div class="stat__label">Conjunto de dicas atual</div>
+            <div class="stat__value" id="clue-progress">1</div>
+          </div>
+          <div class="stat">
+            <div class="stat__label">Tempo decorrido</div>
+            <div class="stat__value" id="elapsed-display">0s</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="experiment-layout">
+        <section class="board">
+          <section class="stimuli-section">
+            <div class="card__header" style="margin-bottom: 18px;">
+              <div>
+                <h2 class="card__title">Painel de estímulos</h2>
+                <p class="card__description">
+                  Os estímulos aparecem em posições embaralhadas. Cada clique conta como tentativa.
+                </p>
+              </div>
+            </div>
+            <div id="stimuli-grid" class="stimuli-grid"></div>
+          </section>
+
+          <section class="selected-section">
+            <div class="card__header" style="margin-bottom: 4px;">
+              <div>
+                <h2 class="card__title">Objetos selecionados</h2>
+                <p class="card__description">Os itens corretos vão sendo registrados abaixo na ordem em que foram selecionados.</p>
+              </div>
+            </div>
+            <div id="selected-grid" class="selected-grid"></div>
+          </section>
+        </section>
+
+        <aside class="sidebar">
+          <section class="score-card">
+            <div class="card__header" style="margin-bottom: 0;">
+              <div>
+                <h2 class="card__title">Pontuação e estado</h2>
+                <p class="card__description">Resumo da execução em tempo real.</p>
+              </div>
+            </div>
+            <div class="score-pill score-pill--success">
+              <span>Acertos</span>
+              <strong id="score-correct">0</strong>
+            </div>
+            <div class="score-pill score-pill--danger">
+              <span>Erros</span>
+              <strong id="score-incorrect">0</strong>
+            </div>
+            <div class="mini-list">
+              <div class="mini-row">
+                <span>Critério de tempo</span>
+                <strong id="criteria-time">Desligado</strong>
+              </div>
+              <div class="mini-row">
+                <span>Critério de acertos</span>
+                <strong id="criteria-correct">Desligado</strong>
+              </div>
+              <div class="mini-row">
+                <span>Critério de erros</span>
+                <strong id="criteria-errors">Desligado</strong>
+              </div>
+              <div class="mini-row">
+                <span>Critério de tentativas</span>
+                <strong id="criteria-attempts">Desligado</strong>
+              </div>
+            </div>
+          </section>
+
+          <section id="final-panel" class="final-panel">
+            <div class="final-panel__title">Experimento encerrado</div>
+            <div class="final-panel__text" id="final-reason-copy">
+              O botão abaixo encerra corretamente o <em>html.Form</em>, salva os campos finais no dataset e também baixa o arquivo de log.
+            </div>
+            <button type="submit" id="finish-submit" class="button button--success submit">Obrigado por participar</button>
+            <div id="log-preview" class="log-preview"></div>
+          </section>
+        </aside>
+      </div>
+
+      <div id="clue-overlay" class="clue-overlay" aria-hidden="true">
+        <div class="clue-dialog">
+          <div class="card__header" style="margin-bottom: 0;">
+            <div>
+              <h2 class="card__title">Dicas verbais</h2>
+              <p class="card__description" id="clue-dialog-text">
+                Leia as dicas liberadas até o momento e registre sua hipótese.
+              </p>
+            </div>
+          </div>
+          <div id="clue-list" class="clue-list"></div>
+          <div class="field">
+            <label for="clue-response-input">Digite a palavra ou item que você pensou</label>
+            <input type="text" id="clue-response-input" autocomplete="off">
+          </div>
+          <div class="actions">
+            <button type="button" id="clue-save-button" class="button button--primary">Salvar resposta</button>
+          </div>
+        </div>
+      </div>
+
+      <audio id="feedback-audio" class="audio-hidden" controls>
+        Seu navegador não suporta o elemento de áudio.
+      </audio>
+
+      <textarea name="final_log" id="final-log-field" hidden></textarea>
+      <textarea name="results_json" id="results-json-field" hidden></textarea>
+      <input type="hidden" name="end_reason" id="end-reason-field">
+      <input type="hidden" name="total_time_seconds" id="total-time-field">
+      <input type="hidden" name="total_attempts" id="total-attempts-field">
+      <input type="hidden" name="total_correct" id="total-correct-field">
+      <input type="hidden" name="total_incorrect" id="total-incorrect-field">
+    </div>
+  </form>
+</body>
+</html>

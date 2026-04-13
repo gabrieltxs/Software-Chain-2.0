@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Fase 2 - Definição dos Elos</title>
+  <style>
+    __COMMON_THEME__
+
+    .stage2-layout {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: minmax(0, 1.6fr) minmax(320px, 0.9fr);
+      align-items: start;
+    }
+
+    .slots-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .slot-card {
+      position: relative;
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      box-shadow: var(--shadow);
+    }
+
+    .slot-card.is-active {
+      border-color: var(--accent);
+      box-shadow: var(--focus), var(--shadow);
+    }
+
+    .slot-card__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .slot-card__title {
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .slot-card__status {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .mode-switch {
+      display: inline-grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      background: #eef3fb;
+      padding: 6px;
+      border-radius: 14px;
+    }
+
+    .mode-switch button {
+      border-radius: 10px;
+      padding: 10px 12px;
+      border: 1px solid transparent;
+      background: transparent;
+      font-weight: 700;
+    }
+
+    .mode-switch button.is-selected {
+      background: #fff;
+      border-color: var(--line-strong);
+      color: var(--accent);
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+    }
+
+    .slot-preview {
+      min-height: 94px;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px dashed var(--line-strong);
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .slot-preview img {
+      max-width: 100%;
+      max-height: 150px;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+
+    .slot-preview--empty {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .asset-panel {
+      position: sticky;
+      top: 20px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .asset-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+
+    .asset-card {
+      display: grid;
+      gap: 10px;
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+      cursor: pointer;
+      transition: transform 0.08s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      text-align: center;
+    }
+
+    .asset-card:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent);
+      box-shadow: var(--focus);
+    }
+
+    .asset-card.is-selected {
+      border-color: var(--accent);
+      box-shadow: var(--focus);
+    }
+
+    .asset-card img {
+      width: 100%;
+      height: 100px;
+      object-fit: contain;
+      background: #f8fafc;
+      border-radius: 12px;
+    }
+
+    .asset-card__name {
+      font-size: 0.86rem;
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    .summary-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #fff;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 1040px) {
+      .stage2-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .asset-panel {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <form id="objects-form">
+    <div class="app-shell">
+      <section class="hero">
+        <div class="hero__eyebrow">Lab.js · Fase 2</div>
+        <h1 class="hero__title">Definição dos objetos e elos</h1>
+        <p class="hero__subtitle">
+          Escolha o conteúdo de cada elo da cadeia. Você pode usar palavras ou imagens.
+          A biblioteca à direita facilita preencher os elos com os arquivos já embutidos no experimento.
+        </p>
+        <div class="hero__chips">
+          <span class="chip">Preenchimento guiado</span>
+          <span class="chip">Modo palavra ou imagem</span>
+          <span class="chip">Salvar / carregar JSON</span>
+          <span class="chip">Ordem dos elos preservada</span>
+        </div>
+      </section>
+
+      <div class="stage2-layout">
+        <section class="section-stack">
+          <div class="card card--soft">
+            <div class="card__header">
+              <div>
+                <h2 class="card__title">Resumo da montagem</h2>
+                <p class="card__description">
+                  O painel abaixo acompanha quantos elos estão preenchidos e qual elo está ativo para receber imagens da biblioteca.
+                </p>
+              </div>
+            </div>
+            <div class="stat-grid">
+              <div class="stat">
+                <div class="stat__label">Elos totais</div>
+                <div class="stat__value" id="summary-total-slots">0</div>
+              </div>
+              <div class="stat">
+                <div class="stat__label">Elos preenchidos</div>
+                <div class="stat__value" id="summary-filled-slots">0</div>
+              </div>
+              <div class="stat">
+                <div class="stat__label">Elo ativo para imagem</div>
+                <div class="stat__value" id="summary-active-slot">Nenhum</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="slots-container" class="slots-grid"></div>
+        </section>
+
+        <aside class="asset-panel">
+          <section class="card">
+            <div class="card__header">
+              <div>
+                <h2 class="card__title">Biblioteca de estímulos</h2>
+                <p class="card__description">
+                  Clique em uma imagem para preencher automaticamente o elo ativo no modo <strong>Imagem</strong>.
+                </p>
+              </div>
+            </div>
+            <div class="helper" id="asset-helper">Selecione um elo no modo imagem para habilitar a inserção rápida.</div>
+            <div id="asset-grid" class="asset-grid" style="margin-top:16px;"></div>
+          </section>
+
+          <section class="card card--soft">
+            <div class="card__header">
+              <div>
+                <h2 class="card__title">Estado atual</h2>
+                <p class="card__description">
+                  Esse painel resume rapidamente o que foi escolhido em cada elo.
+                </p>
+              </div>
+            </div>
+            <div id="object-summary" class="summary-list"></div>
+          </section>
+        </aside>
+      </div>
+
+      <div class="toolbar">
+        <div class="toolbar__meta">
+          <div class="toolbar__title">Salvar, recuperar e iniciar</div>
+          <div class="toolbar__text">O nome abaixo será usado ao exportar o JSON desta fase.</div>
+        </div>
+        <div class="actions">
+          <input type="text" id="objects-name" placeholder="Nome do conjunto de objetos" style="min-width: 250px;">
+          <button type="button" id="save-objects" class="button button--ghost">Salvar objetos</button>
+          <label for="load-objects" class="fake-button button button--ghost">Carregar JSON</label>
+          <input type="file" id="load-objects" class="hidden-input" accept=".json">
+          <button type="button" id="clear-objects" class="button button--danger">Limpar</button>
+          <button type="submit" id="start-experiment" class="button button--primary submit">Iniciar experimento</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</body>
+</html>

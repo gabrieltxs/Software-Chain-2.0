@@ -1,0 +1,23 @@
+{
+  "Nome do Participante": "",
+  "Idade": "",
+  "Sexo": "Masculino",
+  "Nome do Experimentador": "",
+  "Quantidade de Elos na cadeia": "6",
+  "Sequência": "2",
+  "Clues": [
+    "Bola;objeto redondo;usado em jogos;quica no chão",
+    "Cadeira;móvel;tem encosto;serve para sentar",
+    "Gato;animal doméstico;mia;tem bigodes"
+  ],
+  "Instrução": "Selecione os itens na ordem correta. Após a quantidade de acertos definida na sequência, um bloco de dicas será apresentado para que você tente identificar o item alvo.",
+  "Tempo": "0",
+  "Tempo_chk": false,
+  "Acertos": "6",
+  "Acertos_chk": true,
+  "Erros": "10",
+  "Erros_chk": false,
+  "Tentativas": "0",
+  "Tentativas_chk": false,
+  "Nome da Configuração": "config_exemplo"
+}
