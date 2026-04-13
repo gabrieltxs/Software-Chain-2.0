@@ -30,7 +30,7 @@ A fase 1 agora inicia com uma **tela inicial de apresentação do laboratório d
 
 ### Identidade visual
 
-<p align="center">
+<p align="left">
   <img src="assets/logo/chain2.png" alt="Logo do Software Chain 2.0" width="220">
   <img src="assets/logo/laec_logo.png" alt="Logo do LAEC" width="220">
 </p>
@@ -77,10 +77,13 @@ A fase 1 agora inicia com uma **tela inicial de apresentação do laboratório d
       <sub>Desenvolvimento</sub>
     </td>
     <td valign="top">
-      Engenheiro de Inteligência Artificial Sênior na Deloitte e pesquisador no CEIA-UFG, com atuação no desenvolvimento desta plataforma experimental e em projetos aplicados nas áreas de Inteligência Artificial Generativa, Processamento de Linguagem Natural e modelos de linguagem de grande porte.<br><br>
-      Graduado em Engenharia de Computação pela Pontifícia Universidade Católica de Goiás (2017-2022), com o trabalho Predição de resistência antimicrobiana em Pseudomonas aeruginosa com aprendizagem de máquina, sob orientação de Clarimar José Coelho.<br><br>
-      Atualmente é mestrando em Ciência da Computação pela Universidade Federal de Goiás, onde desenvolve, desde 2024, a pesquisa Leis de Escalonamento Industrial em Continual Pre-Training: Otimização de Misturas Intra-Domínio, sob orientação de Arlindo Rodrigues Galvão Filho e coorientação de Walcy Santos Rezende Rios.<br><br>
-      Experiência em fine-tuning, alinhamento, destilação, avaliação de modelos, otimização em HPC, RAG, adaptação de domínio, continual pre-training e leis de escalonamento, com interface entre inteligência artificial, texto industrial e pesquisa aplicada em parceria com Petrobras e NVIDIA.<br><br>
+      Engenheiro de Inteligência Artificial Sênior na Deloitte e pesquisador no CEIA-UFG, com atuação no desenvolvimento desta plataforma experimental e em projetos aplicados nas áreas de Inteligência Artificial Generativa, Processamento de Linguagem Natural e modelos de linguagem de grande porte.
+
+Graduado em Engenharia de Computação pela Pontifícia Universidade Católica de Goiás (2017-2022), com o trabalho Predição de resistência antimicrobiana em Pseudomonas aeruginosa com aprendizagem de máquina, sob orientação de Clarimar José Coelho.
+
+Atualmente é mestrando em Ciência da Computação pela Universidade Federal de Goiás, onde desenvolve, desde 2024, a pesquisa Leis de Escalonamento Industrial em Continual Pre-Training: Otimização de Misturas Intra-Domínio, sob orientação de Arlindo Rodrigues Galvão Filho e coorientação de Walcy Santos Rezende Rios.
+
+Experiência em fine-tuning, alinhamento, destilação, avaliação de modelos, otimização em HPC, RAG, adaptação de domínio, continual pre-training e leis de escalonamento, com interface entre inteligência artificial, texto industrial e pesquisa aplicada em parceria com Petrobras e NVIDIA.<br><br>
       <strong>Currículo Lattes:</strong> <a href="http://lattes.cnpq.br/4244807184243359">http://lattes.cnpq.br/4244807184243359</a>
     </td>
   </tr>
