@@ -28,23 +28,29 @@ Além dos dados automáticos do Lab.js, a versão refatorada preenche também:
 - `total_correct`
 - `total_incorrect`
 
-## Download automático do log
+## Encerramento e download automático
 
-Ao final da tarefa, o botão **“Obrigado por participar”**:
+Quando um critério de conclusão é atingido:
 
-- prepara os campos finais
-- dispara o download de `final_log.txt`
-- deixa a submissão do `html.Form` acontecer normalmente
+- a interface é bloqueada por um overlay em tela cheia
+- a tela orienta o participante a chamar o pesquisador responsável
+- o botão **“Obrigado”** conclui a tarefa e mantém a tela inutilizada
 
-Assim, o comportamento fica mais próximo do uso correto do Lab.js, sem perder a conveniência do arquivo final.
+Ao clicar em **“Obrigado”**:
+
+- os campos finais são preparados
+- o download de uma planilha `XLSX` é disparado
+- a submissão do `html.Form` acontece normalmente
+
+Assim, o comportamento fica mais próximo do uso correto do Lab.js, sem perder a conveniência do arquivo final estruturado.
 
 ## Onde encontrar os dados
 
 ### 1. No dataset exportado do Lab.js
 Útil para análise tabular e consolidação entre participantes.
 
-### 2. No arquivo `final_log.txt`
-Útil para inspeção rápida, conferência manual e auditoria de uma sessão individual.
+### 2. No arquivo `XLSX`
+Útil para inspeção rápida, conferência manual e auditoria de uma sessão individual, com abas para participante, configuração, objetos, dicas e resultados.
 
 ### 3. Em plataformas externas
 Se o experimento for implantado em Open Lab, JATOS ou integração genérica com survey, os dados podem ser exportados pela própria plataforma.
@@ -53,6 +59,7 @@ Se o experimento for implantado em Open Lab, JATOS ou integração genérica com
 
 Para análise automatizada:
 
+- use a aba `Resultados` do `XLSX` para leitura rápida com tabelas e plots
 - use `results_json` quando precisar reconstruir todas as tentativas
 - use `end_reason` e os totais para resumos por participante
 - use `final_log` apenas como trilha textual de conferência

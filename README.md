@@ -26,8 +26,9 @@ Este repositório contém uma refatoração completa do experimento originalment
    - Reescrita do encerramento da fase final para usar submissão real do `html.Form`.
 
 3. **Coleta de dados melhorada**
-   - O log final continua sendo baixado automaticamente.
-   - O mesmo log agora também pode ser salvo no dataset do Lab.js.
+   - O encerramento da Fase 3 agora usa um overlay de bloqueio em tela cheia após o critério de conclusão.
+   - Os resultados passam a ser baixados automaticamente em `XLSX`, com abas separadas e plots na aba final.
+   - O log textual continua disponível no dataset do Lab.js para conferência.
    - Campos resumo adicionais (`results_json`, `end_reason`, `total_time_seconds`, etc.) foram adicionados.
 
 ## Começando rápido

@@ -222,49 +222,6 @@
       font-size: 0.94rem;
     }
 
-    .final-panel {
-      display: none;
-      justify-items: center;
-      gap: 14px;
-      padding: 24px;
-      border-radius: 22px;
-      border: 1px solid var(--line);
-      background: #fff;
-      box-shadow: var(--shadow);
-      text-align: center;
-    }
-
-    .final-panel.is-visible {
-      display: grid;
-    }
-
-    .final-panel__title {
-      font-size: 1.4rem;
-      font-weight: 800;
-    }
-
-    .final-panel__text {
-      max-width: 760px;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
-    .log-preview {
-      display: none;
-      padding: 16px;
-      white-space: pre-wrap;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: #0f172a;
-      color: #e2e8f0;
-      width: 100%;
-      max-height: 260px;
-      overflow: auto;
-      text-align: left;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.84rem;
-    }
-
     .clue-overlay {
       display: none;
       position: fixed;
@@ -314,6 +271,113 @@
 
     .audio-hidden {
       display: none;
+    }
+
+    .app-lock {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      padding: 20px;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at top, rgba(37, 99, 235, 0.2), transparent 35%),
+        rgba(15, 23, 42, 0.82);
+      backdrop-filter: blur(6px);
+    }
+
+    .app-lock.is-visible {
+      display: flex;
+    }
+
+    .app-lock__dialog {
+      width: min(760px, 100%);
+      display: grid;
+      gap: 18px;
+      padding: 28px;
+      border-radius: 26px;
+      background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+      border: 1px solid rgba(184, 196, 211, 0.9);
+      box-shadow: 0 26px 70px rgba(15, 23, 42, 0.3);
+      text-align: center;
+    }
+
+    .app-lock__eyebrow {
+      display: inline-flex;
+      justify-self: center;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #e0eaff;
+      color: #1d4ed8;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .app-lock__title {
+      font-size: clamp(1.5rem, 1.25rem + 1vw, 2.2rem);
+      font-weight: 900;
+    }
+
+    .app-lock__text {
+      margin: 0 auto;
+      max-width: 620px;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 1rem;
+    }
+
+    .app-lock__meta {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .app-lock__meta-item {
+      display: grid;
+      gap: 6px;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .app-lock__meta-item span {
+      color: var(--muted);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    .app-lock__meta-item strong {
+      font-size: 1.1rem;
+    }
+
+    .app-lock__actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .app-lock__button {
+      min-width: 180px;
+    }
+
+    .app-lock__button[disabled] {
+      opacity: 0.75;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .app-lock__footnote {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
     }
 
     @media (max-width: 1024px) {
@@ -430,14 +494,6 @@
             </div>
           </section>
 
-          <section id="final-panel" class="final-panel">
-            <div class="final-panel__title">Experimento encerrado</div>
-            <div class="final-panel__text" id="final-reason-copy">
-              O botão abaixo encerra corretamente o <em>html.Form</em>, salva os campos finais no dataset e também baixa o arquivo de log.
-            </div>
-            <button type="submit" id="finish-submit" class="button button--success submit">Obrigado por participar</button>
-            <div id="log-preview" class="log-preview"></div>
-          </section>
         </aside>
       </div>
 
@@ -462,12 +518,42 @@
         </div>
       </div>
 
+      <div id="final-overlay" class="app-lock" aria-hidden="true">
+        <div class="app-lock__dialog" role="dialog" aria-modal="true" aria-labelledby="final-overlay-title">
+          <div class="app-lock__eyebrow">Sessão encerrada</div>
+          <h2 id="final-overlay-title" class="app-lock__title">Esta etapa foi concluída</h2>
+          <p id="final-overlay-text" class="app-lock__text">
+            O critério de conclusão foi atingido. Chame o pesquisador responsável para concluir o experimento.
+          </p>
+          <div class="app-lock__meta">
+            <div class="app-lock__meta-item">
+              <span>Motivo</span>
+              <strong id="final-overlay-reason">—</strong>
+            </div>
+            <div class="app-lock__meta-item">
+              <span>Tempo total</span>
+              <strong id="final-overlay-time">0s</strong>
+            </div>
+            <div class="app-lock__meta-item">
+              <span>Tentativas</span>
+              <strong id="final-overlay-attempts">0</strong>
+            </div>
+          </div>
+          <div class="app-lock__actions">
+            <button type="submit" id="finish-submit" class="button button--success submit app-lock__button">Obrigado</button>
+          </div>
+          <div id="final-overlay-footnote" class="app-lock__footnote">
+            Após o clique, a tela permanecerá bloqueada e os resultados serão baixados automaticamente.
+          </div>
+        </div>
+      </div>
+
       <audio id="feedback-audio" class="audio-hidden" controls>
         Seu navegador não suporta o elemento de áudio.
       </audio>
 
-      <textarea name="final_log" id="final-log-field" hidden></textarea>
-      <textarea name="results_json" id="results-json-field" hidden></textarea>
+      <input type="hidden" name="final_log" id="final-log-field">
+      <input type="hidden" name="results_json" id="results-json-field">
       <input type="hidden" name="end_reason" id="end-reason-field">
       <input type="hidden" name="total_time_seconds" id="total-time-field">
       <input type="hidden" name="total_attempts" id="total-attempts-field">
