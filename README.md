@@ -1,12 +1,20 @@
-# Experimento de cadeia comportamental com dicas verbais condicionais - versão refatorada para Lab.js
 
-Este repositório contém uma **plataforma experimental refatorada em Lab.js** para condução de tarefas de desempenho sequencial com **cadeia de elos configuráveis** e **liberação condicional de dicas verbais**. O software preserva a lógica central do experimento original, mas reorganiza a implementação em camadas legíveis, melhora a interface, corrige problemas funcionais e amplia a **rastreabilidade dos dados**, incluindo exportação automática em `XLSX` e geração de log textual estruturado.
+<p align="center">
+  <img src="assets/logo/chain2.png" alt="Logo do Software Chain 2.0" width="350">
+</p>
+
+# Software Chain 2.0 - Experimento de cadeia comportamental com dicas verbais condicionais - versão para Lab.js
+
+Este repositório contém uma **plataforma experimental em Lab.js** para condução de tarefas de desempenho sequencial com **cadeia de elos configuráveis** e **liberação condicional de dicas verbais**. O software preserva a lógica central do experimento original, mas reorganiza a implementação em camadas legíveis, melhora a interface, corrige problemas funcionais e amplia a **rastreabilidade dos dados**, incluindo exportação automática em `XLSX` e geração de log textual estruturado.
 
 Mais do que uma simples interface de coleta, o sistema deve ser entendido como um **instrumento de pesquisa parametrizável**, apropriado para protocolos que investiguem seleção sequencial, controle de estímulos, evocação por pistas, respostas verbais sob dicas e desempenho sob diferentes critérios de progressão e encerramento.
 
-## Abertura institucional do LAEC
+##
+## Laboratório de Análise Experimental do Comportamento (LAEC)
 
-A fase 1 agora inicia com uma **tela inicial de apresentação do laboratório de pesquisa LAEC**, com botão `Iniciar` centralizado horizontalmente e posicionado aproximadamente a dois terços da altura útil da tela. Essa abertura antecede a configuração experimental e documenta a identidade científica e os créditos do projeto.
+<p align="center">
+  <img src="assets/logo/laec_logo.png" alt="Logo do LAEC" width="220">
+</p>
 
 ### Linha de pesquisa
 
@@ -14,26 +22,11 @@ A fase 1 agora inicia com uma **tela inicial de apresentação do laboratório d
 - Objetivos: análise experimental de processos comportamentais básicos e complexos, como o efeito de contingências de reforço, comportamento verbal e linguagem, controle de estímulos e seguimento de regras, comportamento de escolha em humanos e não humanos e privacidade.
 - Aplicações: análise funcional do comportamento em contextos clínico, escolar e organizacional, análise do comportamento do consumidor e uso e avaliação de técnicas verbais e não verbais na modificação do comportamento infantil e adulto.
 
-### Palavras-chave
-
-- Análise experimental do comportamento
-- Análise comportamental aplicada
-- Comportamento verbal, linguagem e pensamento
-- Comportamento de escolha humano e infra-humano
-- Comportamento do consumidor
-
 ### Áreas do conhecimento
 
 - `7.07.02 - Psicologia Experimental`
 - `7.07.02.02-0 - Processos de Aprendizagem, Memória e Motivação`
 - `7.07.10 - Tratamento e Prevenção Psicológica`
-
-### Identidade visual
-
-<p align="center">
-  <img src="assets/logo/chain2.png" alt="Logo do Software Chain 2.0" width="220">
-  <img src="assets/logo/laec_logo.png" alt="Logo do LAEC" width="220">
-</p>
 
 ### Fichas presentes na tela inicial
 
@@ -77,10 +70,8 @@ A fase 1 agora inicia com uma **tela inicial de apresentação do laboratório d
       <sub>Desenvolvimento</sub>
     </td>
     <td valign="top">
-      Engenheiro de Inteligência Artificial Sênior na Deloitte e pesquisador no CEIA-UFG, com atuação no desenvolvimento desta plataforma experimental e em projetos aplicados nas áreas de Inteligência Artificial Generativa, Processamento de Linguagem Natural e modelos de linguagem de grande porte.<br><br>
-      Graduado em Engenharia de Computação pela Pontifícia Universidade Católica de Goiás (2017-2022), com o trabalho Predição de resistência antimicrobiana em Pseudomonas aeruginosa com aprendizagem de máquina, sob orientação de Clarimar José Coelho.<br><br>
-      Atualmente é mestrando em Ciência da Computação pela Universidade Federal de Goiás, onde desenvolve, desde 2024, a pesquisa Leis de Escalonamento Industrial em Continual Pre-Training: Otimização de Misturas Intra-Domínio, sob orientação de Arlindo Rodrigues Galvão Filho e coorientação de Walcy Santos Rezende Rios.<br><br>
-      Experiência em fine-tuning, alinhamento, destilação, avaliação de modelos, otimização em HPC, RAG, adaptação de domínio, continual pre-training e leis de escalonamento, com interface entre inteligência artificial, texto industrial e pesquisa aplicada em parceria com Petrobras e NVIDIA.<br><br>
+      Engenheiro de Inteligência Artificial Sênior e pesquisador no CEIA-UFG, com atuação no desenvolvimento desta plataforma experimental e em projetos aplicados nas áreas de Inteligência Artificial Generativa, Processamento de Linguagem Natural e modelos de linguagem de grande porte. Graduado em Engenharia de Computação pela Pontifícia Universidade Católica de Goiás (2017-2022), com o trabalho Predição de resistência antimicrobiana em Pseudomonas aeruginosa com aprendizagem de máquina, sob orientação de Clarimar José Coelho. Atualmente é mestrando em Ciência da Computação pela Universidade Federal de Goiás, onde desenvolve, desde 2024, a pesquisa Leis de Escalonamento Industrial em Continual Pre-Training: Otimização de Misturas Intra-Domínio, sob orientação de Arlindo Rodrigues Galvão Filho e coorientação de Walcy Santos Rezende Rios.
+<br><br>
       <strong>Currículo Lattes:</strong> <a href="http://lattes.cnpq.br/4244807184243359">http://lattes.cnpq.br/4244807184243359</a>
     </td>
   </tr>
@@ -256,7 +247,7 @@ Ao final, o sistema:
 
 ## Dados, rastreabilidade e produtos gerados
 
-A versão refatorada amplia significativamente a rastreabilidade experimental. Além dos dados padrões do Lab.js, a aplicação preenche campos adicionais:
+A versão amplia significativamente a rastreabilidade experimental. Além dos dados padrões do Lab.js, a aplicação preenche campos adicionais:
 
 - `final_log`
 - `results_json`
