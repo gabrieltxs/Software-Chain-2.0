@@ -30,6 +30,10 @@
   }
 
   const form = document.getElementById('config-form')
+  const introScreen = document.getElementById('laec-intro')
+  const introStartButton = document.getElementById('intro-start')
+  const configContent = document.getElementById('config-content')
+  const configHero = document.getElementById('config-hero')
   const participantName = document.getElementById('participant-name')
   const participantAge = document.getElementById('participant-age')
   const participantSex = document.getElementById('participant-sex')
@@ -112,6 +116,30 @@
 
   function getClueValues() {
     return Array.from(cluesFields.querySelectorAll('input')).map((input) => input.value)
+  }
+
+  function revealConfiguration() {
+    if (introScreen) {
+      introScreen.hidden = true
+    }
+
+    if (configContent) {
+      configContent.hidden = false
+    }
+
+    if (introStartButton) {
+      introStartButton.setAttribute('aria-expanded', 'true')
+    }
+
+    window.requestAnimationFrame(() => {
+      if (configHero && typeof configHero.scrollIntoView === 'function') {
+        configHero.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+
+      if (participantName && typeof participantName.focus === 'function') {
+        participantName.focus()
+      }
+    })
   }
 
   function collectStage1Data() {
@@ -263,6 +291,13 @@
     element.addEventListener('input', updateSummary)
     element.addEventListener('change', updateSummary)
   })
+
+  if (introStartButton) {
+    introStartButton.addEventListener('click', (event) => {
+      event.preventDefault()
+      revealConfiguration()
+    })
+  }
 
   saveConfigButton.addEventListener('click', (event) => {
     event.preventDefault()
