@@ -1,6 +1,10 @@
-# Experimento de cadeia comportamental com dicas verbais condicionais - versão refatorada para Lab.js
 
-Este repositório contém uma **plataforma experimental refatorada em Lab.js** para condução de tarefas de desempenho sequencial com **cadeia de elos configuráveis** e **liberação condicional de dicas verbais**. O software preserva a lógica central do experimento original, mas reorganiza a implementação em camadas legíveis, melhora a interface, corrige problemas funcionais e amplia a **rastreabilidade dos dados**, incluindo exportação automática em `XLSX` e geração de log textual estruturado.
+<p align="center">
+  <img src="assets/logo/chain2.png" alt="Logo do Software Chain 2.0" width="220">
+</p>
+# Software Chain 2.0 - Experimento de cadeia comportamental com dicas verbais condicionais - versão para Lab.js
+
+Este repositório contém uma **plataforma experimental em Lab.js** para condução de tarefas de desempenho sequencial com **cadeia de elos configuráveis** e **liberação condicional de dicas verbais**. O software preserva a lógica central do experimento original, mas reorganiza a implementação em camadas legíveis, melhora a interface, corrige problemas funcionais e amplia a **rastreabilidade dos dados**, incluindo exportação automática em `XLSX` e geração de log textual estruturado.
 
 Mais do que uma simples interface de coleta, o sistema deve ser entendido como um **instrumento de pesquisa parametrizável**, apropriado para protocolos que investiguem seleção sequencial, controle de estímulos, evocação por pistas, respostas verbais sob dicas e desempenho sob diferentes critérios de progressão e encerramento.
 
@@ -28,10 +32,9 @@ A fase 1 agora inicia com uma **tela inicial de apresentação do laboratório d
 - `7.07.02.02-0 - Processos de Aprendizagem, Memória e Motivação`
 - `7.07.10 - Tratamento e Prevenção Psicológica`
 
-### Identidade visual
+### Laboratório de Análise Experimental do Comportamento (LAEC)
 
 <p align="left">
-  <img src="assets/logo/chain2.png" alt="Logo do Software Chain 2.0" width="220">
   <img src="assets/logo/laec_logo.png" alt="Logo do LAEC" width="220">
 </p>
 
@@ -257,7 +260,7 @@ Ao final, o sistema:
 
 ## Dados, rastreabilidade e produtos gerados
 
-A versão refatorada amplia significativamente a rastreabilidade experimental. Além dos dados padrões do Lab.js, a aplicação preenche campos adicionais:
+A versão amplia significativamente a rastreabilidade experimental. Além dos dados padrões do Lab.js, a aplicação preenche campos adicionais:
 
 - `final_log`
 - `results_json`
