@@ -93,6 +93,8 @@ A fase 1 agora inicia com uma **tela inicial de apresentação do laboratório d
 - `assets/`: imagens e áudios usados no experimento.
 - `examples/`: arquivos de exemplo para configuração e objetos.
 - `tools/build_labjs_json.py`: script para recompilar o JSON final a partir dos fontes.
+- `LICENSE`: termos da licença Apache License 2.0 adotada no repositório.
+- `NOTICE`: arquivo de atribuição exigido pela distribuição sob Apache 2.0.
 - `docs/`: documentação complementar em Markdown, material visual derivado do PDF do projeto e a documentação formal em `.docx`.
 
 ## Caracterização científica e metodológica do experimento
@@ -362,14 +364,21 @@ python tools/build_labjs_json.py
 
 ## Licença adotada
 
-Este repositório foi ajustado para a licença **BSD-3-Clause**.
+Este repositório passa a ser distribuído sob a licença **Apache License 2.0**.
 
-A opção por uma licença permissiva deste tipo é adequada para software de pesquisa porque:
+Os termos completos estão em `LICENSE`, e os avisos de atribuição e créditos
+de distribuição estão em `NOTICE`.
 
-- facilita reutilização acadêmica e institucional;
-- preserva a exigência de manutenção dos avisos de copyright e da licença;
-- adiciona cláusula explícita de **não endosso**, importante quando instrumentos experimentais podem ser redistribuídos ou adaptados por terceiros;
-- mantém baixa fricção para replicação, auditoria e extensão do software.
+A adoção de Apache 2.0 é adequada para este tipo de software de pesquisa porque:
+
+- facilita reutilização acadêmica, institucional e técnica;
+- exige preservação dos avisos de copyright, licença e atribuição aplicáveis;
+- inclui concessão expressa de licença de patentes dos contribuidores, o que reduz ambiguidade jurídica em redistribuições;
+- mantém baixa fricção para replicação, auditoria, adaptação e extensão do software.
+
+Nos termos da própria Apache 2.0, nomes, marcas e identidades institucionais
+não são automaticamente licenciados para uso promocional fora do contexto de
+atribuição e descrição da origem do trabalho.
 
 A licença do código **não substitui** obrigações éticas, institucionais ou regulatórias sobre uso com participantes humanos, dados pessoais, consentimento, comitês de ética ou proteção de dados.
 
