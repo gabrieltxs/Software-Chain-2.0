@@ -2,86 +2,51 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Fase 3 - Execução do experimento</title>
+  <title>Fase 3 - Execucao do experimento</title>
   <style>
     __COMMON_THEME__
 
     body {
-      padding: 18px;
+      padding: 14px;
     }
 
     .experiment-shell {
-      max-width: 1400px;
+      max-width: 1200px;
       margin: 0 auto;
       display: grid;
-      gap: 18px;
+      gap: 14px;
     }
 
     .experiment-header {
-      display: grid;
-      gap: 16px;
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #2851e3 100%);
       color: #fff;
       border-radius: 22px;
-      padding: 20px 22px;
+      padding: 22px 24px;
       box-shadow: var(--shadow);
     }
 
-    .experiment-header__top {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      align-items: start;
-      flex-wrap: wrap;
-    }
-
-    .experiment-header__title {
-      font-size: clamp(1.25rem, 1.1rem + 0.9vw, 1.8rem);
-      font-weight: 800;
-    }
-
-    .experiment-header__description {
-      color: rgba(255,255,255,0.82);
-      line-height: 1.5;
-      margin-top: 6px;
-      max-width: 920px;
-    }
-
-    .status-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .status-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.12);
-      color: #fff;
-      font-size: 0.9rem;
-      font-weight: 700;
+    .experiment-header__instruction {
+      margin: 0;
+      font-size: clamp(1.25rem, 1.05rem + 1vw, 1.95rem);
+      font-weight: 900;
+      line-height: 1.4;
+      letter-spacing: 0.01em;
     }
 
     .experiment-layout {
-      display: grid;
-      gap: 18px;
-      grid-template-columns: minmax(0, 1.9fr) minmax(310px, 0.85fr);
-      align-items: start;
+      display: block;
     }
 
     .board {
       display: grid;
-      gap: 18px;
+      gap: 14px;
     }
 
     .stimuli-section {
       background: rgba(255,255,255,0.9);
       border: 1px solid var(--line);
       border-radius: 22px;
-      padding: 18px;
+      padding: 16px;
       box-shadow: var(--shadow);
     }
 
@@ -134,9 +99,7 @@
     }
 
     .selected-section {
-      display: grid;
-      gap: 12px;
-      padding: 16px;
+      padding: 12px;
       border-radius: 22px;
       border: 1px solid var(--line);
       background: #fff;
@@ -167,59 +130,6 @@
       max-height: 80px;
       object-fit: contain;
       border-radius: 10px;
-    }
-
-    .sidebar {
-      display: grid;
-      gap: 18px;
-      position: sticky;
-      top: 18px;
-    }
-
-    .score-card {
-      display: grid;
-      gap: 14px;
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 18px;
-      box-shadow: var(--shadow);
-    }
-
-    .score-pill {
-      padding: 16px;
-      border-radius: 16px;
-      color: #fff;
-      font-weight: 800;
-      font-size: 1.25rem;
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .score-pill--success {
-      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
-    }
-
-    .score-pill--danger {
-      background: linear-gradient(135deg, #c2410c 0%, #ef4444 100%);
-    }
-
-    .mini-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .mini-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: #f8fbff;
-      font-size: 0.94rem;
     }
 
     .clue-overlay {
@@ -381,14 +291,6 @@
     }
 
     @media (max-width: 1024px) {
-      .experiment-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-        position: static;
-      }
-
       .stimuli-grid {
         min-height: 0;
       }
@@ -399,102 +301,21 @@
   <form id="experiment-form" novalidate>
     <div class="experiment-shell">
       <section class="experiment-header">
-        <div class="experiment-header__top">
-          <div>
-            <div class="hero__eyebrow">Execução da tarefa</div>
-            <h1 class="experiment-header__title">Selecione os estímulos na ordem correta e use as dicas quando elas aparecerem</h1>
-            <p class="experiment-header__description" id="instruction-copy">
-              A instrução configurada será mostrada aqui no início da execução.
-            </p>
-          </div>
-          <div class="status-chips">
-            <div class="status-chip" id="status-sequence-chip">Sequência: —</div>
-            <div class="status-chip" id="status-reason-chip">Status: em andamento</div>
-          </div>
-        </div>
-
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat__label">Itens corretos na cadeia</div>
-            <div class="stat__value" id="progress-sequence">0 / 0</div>
-          </div>
-          <div class="stat">
-            <div class="stat__label">Tentativas registradas</div>
-            <div class="stat__value" id="attempt-count">0</div>
-          </div>
-          <div class="stat">
-            <div class="stat__label">Conjunto de dicas atual</div>
-            <div class="stat__value" id="clue-progress">1</div>
-          </div>
-          <div class="stat">
-            <div class="stat__label">Tempo decorrido</div>
-            <div class="stat__value" id="elapsed-display">0s</div>
-          </div>
-        </div>
+        <p class="experiment-header__instruction" id="instruction-copy">
+          A instrucao configurada sera mostrada aqui no inicio da execucao.
+        </p>
       </section>
 
       <div class="experiment-layout">
         <section class="board">
           <section class="stimuli-section">
-            <div class="card__header" style="margin-bottom: 18px;">
-              <div>
-                <h2 class="card__title">Painel de estímulos</h2>
-                <p class="card__description">
-                  Os estímulos aparecem em posições embaralhadas. Cada clique conta como tentativa.
-                </p>
-              </div>
-            </div>
             <div id="stimuli-grid" class="stimuli-grid"></div>
           </section>
 
-          <section class="selected-section">
-            <div class="card__header" style="margin-bottom: 4px;">
-              <div>
-                <h2 class="card__title">Objetos selecionados</h2>
-                <p class="card__description">Os itens corretos vão sendo registrados abaixo na ordem em que foram selecionados.</p>
-              </div>
-            </div>
+          <section id="selected-section" class="selected-section" hidden>
             <div id="selected-grid" class="selected-grid"></div>
           </section>
         </section>
-
-        <aside class="sidebar">
-          <section class="score-card">
-            <div class="card__header" style="margin-bottom: 0;">
-              <div>
-                <h2 class="card__title">Pontuação e estado</h2>
-                <p class="card__description">Resumo da execução em tempo real.</p>
-              </div>
-            </div>
-            <div class="score-pill score-pill--success">
-              <span>Acertos</span>
-              <strong id="score-correct">0</strong>
-            </div>
-            <div class="score-pill score-pill--danger">
-              <span>Erros</span>
-              <strong id="score-incorrect">0</strong>
-            </div>
-            <div class="mini-list">
-              <div class="mini-row">
-                <span>Critério de tempo</span>
-                <strong id="criteria-time">Desligado</strong>
-              </div>
-              <div class="mini-row">
-                <span>Critério de acertos</span>
-                <strong id="criteria-correct">Desligado</strong>
-              </div>
-              <div class="mini-row">
-                <span>Critério de erros</span>
-                <strong id="criteria-errors">Desligado</strong>
-              </div>
-              <div class="mini-row">
-                <span>Critério de tentativas</span>
-                <strong id="criteria-attempts">Desligado</strong>
-              </div>
-            </div>
-          </section>
-
-        </aside>
       </div>
 
       <div id="clue-overlay" class="clue-overlay" aria-hidden="true">
@@ -503,13 +324,13 @@
             <div>
               <h2 class="card__title">Dicas verbais</h2>
               <p class="card__description" id="clue-dialog-text">
-                Leia as dicas liberadas até o momento e registre sua hipótese.
+                Leia as dicas liberadas ate o momento e registre sua hipotese.
               </p>
             </div>
           </div>
           <div id="clue-list" class="clue-list"></div>
           <div class="field">
-            <label for="clue-response-input">Digite a palavra ou item que você pensou</label>
+            <label for="clue-response-input">Digite a palavra ou item que voce pensou</label>
             <input type="text" id="clue-response-input" autocomplete="off">
           </div>
           <div class="actions">
@@ -520,15 +341,15 @@
 
       <div id="final-overlay" class="app-lock" aria-hidden="true">
         <div class="app-lock__dialog" role="dialog" aria-modal="true" aria-labelledby="final-overlay-title">
-          <div class="app-lock__eyebrow">Sessão encerrada</div>
-          <h2 id="final-overlay-title" class="app-lock__title">Esta etapa foi concluída</h2>
+          <div class="app-lock__eyebrow">Sessao encerrada</div>
+          <h2 id="final-overlay-title" class="app-lock__title">Esta etapa foi concluida</h2>
           <p id="final-overlay-text" class="app-lock__text">
-            O critério de conclusão foi atingido. Chame o pesquisador responsável para concluir o experimento.
+            O criterio de conclusao foi atingido. Chame o pesquisador responsavel para concluir o experimento.
           </p>
           <div class="app-lock__meta">
             <div class="app-lock__meta-item">
               <span>Motivo</span>
-              <strong id="final-overlay-reason">—</strong>
+              <strong id="final-overlay-reason">-</strong>
             </div>
             <div class="app-lock__meta-item">
               <span>Tempo total</span>
@@ -543,14 +364,29 @@
             <button type="submit" id="finish-submit" class="button button--success submit app-lock__button">Obrigado</button>
           </div>
           <div id="final-overlay-footnote" class="app-lock__footnote">
-            Após o clique, a tela permanecerá bloqueada e os resultados serão baixados automaticamente.
+            Apos o clique, a tela permanecera bloqueada e os resultados serao baixados automaticamente.
           </div>
         </div>
       </div>
 
       <audio id="feedback-audio" class="audio-hidden" controls>
-        Seu navegador não suporta o elemento de áudio.
+        Seu navegador nao suporta o elemento de audio.
       </audio>
+
+      <div hidden aria-hidden="true">
+        <span id="status-sequence-chip"></span>
+        <span id="status-reason-chip"></span>
+        <span id="progress-sequence"></span>
+        <span id="attempt-count"></span>
+        <span id="clue-progress"></span>
+        <span id="elapsed-display"></span>
+        <span id="score-correct"></span>
+        <span id="score-incorrect"></span>
+        <span id="criteria-time"></span>
+        <span id="criteria-correct"></span>
+        <span id="criteria-errors"></span>
+        <span id="criteria-attempts"></span>
+      </div>
 
       <input type="hidden" name="final_log" id="final-log-field">
       <input type="hidden" name="results_json" id="results-json-field">

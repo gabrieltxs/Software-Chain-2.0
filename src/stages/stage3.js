@@ -57,6 +57,7 @@
   const form = document.getElementById('experiment-form')
   const instructionCopy = document.getElementById('instruction-copy')
   const stimuliGrid = document.getElementById('stimuli-grid')
+  const selectedSection = document.getElementById('selected-section')
   const selectedGrid = document.getElementById('selected-grid')
 
   const progressSequence = document.getElementById('progress-sequence')
@@ -929,14 +930,26 @@
   function updateRuntimeDisplays() {
     const endTimestamp = endTime ? endTime.getTime() : Date.now()
     const elapsedSeconds = Math.floor((endTimestamp - startTime.getTime()) / 1000)
-    progressSequence.textContent = `${currentSequenceIndex} / ${correctOrder.length || numComponents}`
-    attemptCountDisplay.textContent = String(attemptCount)
-    clueProgressDisplay.textContent = processedClues.length
-      ? `${Math.min(clueSetIndex + 1, processedClues.length)} / ${processedClues.length}`
-      : '0 / 0'
-    elapsedDisplay.textContent = formatDuration(elapsedSeconds)
-    scoreCorrect.textContent = String(correctScore)
-    scoreIncorrect.textContent = String(incorrectScore)
+    if (progressSequence) {
+      progressSequence.textContent = `${currentSequenceIndex} / ${correctOrder.length || numComponents}`
+    }
+    if (attemptCountDisplay) {
+      attemptCountDisplay.textContent = String(attemptCount)
+    }
+    if (clueProgressDisplay) {
+      clueProgressDisplay.textContent = processedClues.length
+        ? `${Math.min(clueSetIndex + 1, processedClues.length)} / ${processedClues.length}`
+        : '0 / 0'
+    }
+    if (elapsedDisplay) {
+      elapsedDisplay.textContent = formatDuration(elapsedSeconds)
+    }
+    if (scoreCorrect) {
+      scoreCorrect.textContent = String(correctScore)
+    }
+    if (scoreIncorrect) {
+      scoreIncorrect.textContent = String(incorrectScore)
+    }
     finalOverlayReason.textContent = endReason
     finalOverlayTime.textContent = formatDuration(totalExperimentTime || elapsedSeconds)
     finalOverlayAttempts.textContent = String(attemptCount)
@@ -981,6 +994,14 @@
   }
 
   function appendSelectedItem(item) {
+    if (!selectedGrid) {
+      return
+    }
+
+    if (selectedSection) {
+      selectedSection.hidden = false
+    }
+
     const card = document.createElement('div')
     card.className = 'selected-card'
     if (looksLikeImage(item.value)) {
@@ -1001,7 +1022,9 @@
   }
 
   function setStatusReason(text) {
-    statusReasonChip.textContent = `Status: ${text}`
+    if (statusReasonChip) {
+      statusReasonChip.textContent = `Status: ${text}`
+    }
   }
 
   function logResult(entry) {
