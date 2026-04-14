@@ -1615,6 +1615,17 @@
     finalPayloadPrepared = true
   }
 
+  function submitExperimentForm() {
+    allowNativeSubmit = true
+    window.setTimeout(() => {
+      if (typeof form.requestSubmit === 'function') {
+        form.requestSubmit()
+      } else {
+        form.submit()
+      }
+    }, 150)
+  }
+
   function endExperiment() {
     if (experimentEnded) {
       return
@@ -1634,11 +1645,15 @@
     clueSaveButton.disabled = true
     setStimuliLocked(true)
     setStatusReason('encerrado')
-    finalOverlayText.textContent = 'A etapa foi encerrada e a interface foi bloqueada. Chame o pesquisador responsável para concluir o experimento.'
-    finalOverlayFootnote.textContent = 'Ao clicar em "Obrigado", a tela continuará bloqueada e os resultados serão baixados em uma planilha Excel.'
-    finalOverlay.classList.add('is-visible')
-    finalOverlay.setAttribute('aria-hidden', 'false')
     updateRuntimeDisplays()
+
+    try {
+      prepareFinalPayloadAndDownload()
+    } catch (error) {
+      console.error('Falha ao preparar o encerramento automatico:', error)
+    }
+
+    submitExperimentForm()
   }
 
   clueSaveButton.addEventListener('click', handleClueSubmission)
@@ -1688,7 +1703,11 @@
     }
 
     if (!finalPayloadPrepared) {
-      prepareFinalPayloadAndDownload()
+      try {
+        prepareFinalPayloadAndDownload()
+      } catch (error) {
+        console.error('Falha ao gerar a planilha final durante a submissao:', error)
+      }
     }
   })
 

@@ -87,7 +87,7 @@ screen_updates = {
     '5': 'Abrindo apresentação do LAEC',
     '19': 'Abrindo definição dos elos',
     '11': 'Iniciando experimento',
-    '9': 'Experimento encerrado.\n\nObrigado!'
+    '9': 'Experimento encerrado.\n\nObrigado!\n\nChame o pesquisador ou entrevistador.'
 }
 for cid, text in screen_updates.items():
     for obj in components[cid].get('content', []):
