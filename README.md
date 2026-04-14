@@ -9,7 +9,18 @@ Este repositório contém uma **plataforma experimental em Lab.js** para conduç
 
 Mais do que uma simples interface de coleta, o sistema deve ser entendido como um **instrumento de pesquisa parametrizável**, apropriado para protocolos que investiguem seleção sequencial, controle de estímulos, evocação por pistas, respostas verbais sob dicas e desempenho sob diferentes critérios de progressão e encerramento.
 
-##
+### Tutorial - Do download à execução em menos de 1 minuto.
+
+<p align="center">
+  <video src="assets/video/tutorial.mp4" controls width="920">
+    Seu navegador ou visualizador de Markdown não suporta vídeo embutido.
+  </video>
+</p>
+
+<p align="center">
+  <a href="assets/video/tutorial.mp4">Abrir vídeo tutorial</a>
+</p>
+
 ## Laboratório de Análise Experimental do Comportamento (LAEC)
 
 <p align="center">
