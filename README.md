@@ -364,6 +364,14 @@ Para recompilar o JSON a partir dos fontes:
 python tools/build_labjs_json.py
 ```
 
+O construtor também pode ser importado sem ler recursos nem sobrescrever `dist/`; `build_data()` monta o documento em memória. Para verificar a equivalência do artefato, a inclusão dos fontes e a ausência de efeitos na importação, usando apenas a biblioteca padrão do Python:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+Esses testes verificam o empacotamento. Não substituem sessões-piloto no Lab.js nem validam o protocolo experimental.
+
 ## Licença adotada
 
 Este repositório passa a ser distribuído sob a licença **Apache License 2.0**.
